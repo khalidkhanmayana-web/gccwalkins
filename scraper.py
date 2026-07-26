@@ -6,26 +6,22 @@ from bs4 import BeautifulSoup
 TARGET_URL = "https://gccwalkin.com/"
 DATA_FILE = "posts.json"
 
-def fetch_job_details(job_url):
+def fetch_job_image(job_url):
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
     try:
         res = requests.get(job_url, headers=headers, timeout=10)
         if res.status_code == 200:
             soup = BeautifulSoup(res.text, 'html.parser')
-            # Look for standard WordPress content containers
+            
+            # Target the post content area where flyers/posters are uploaded
             content_div = soup.find('div', class_='entry-content') or soup.find('div', class_='bs-content') or soup.find('article')
             if content_div:
-                for element in content_div(["script", "style", "iframe", "header", "footer"]):
-                    element.decompose()
-                return content_div.decode_contents()
-            else:
-                # Fallback: grab all paragraphs on the page
-                paragraphs = soup.find_all('p')
-                if paragraphs:
-                    return "".join([str(p) for p in paragraphs])
+                img_tag = content_div.find('img')
+                if img_tag and img_tag.get('src'):
+                    return img_tag['src']
     except Exception as e:
-        print(f"Error fetching details for {job_url}: {e}")
-    return "<p>Please visit the official source for full walk-in interview details and venue requirements.</p>"
+        print(f"Error fetching image for {job_url}: {e}")
+    return None
 
 def fetch_latest_posts():
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
@@ -44,29 +40,29 @@ def fetch_latest_posts():
             if "gccwalkin.com" in href and href != "https://gccwalkin.com/":
                 skip_keywords = ["privacy policy", "disclaimer", "contact", "about us", "faqs", "post job", "home"]
                 if not any(sk in text.lower() for sk in skip_keywords):
-                    print(f"Fetching details for: {text}")
-                    details_html = fetch_job_details(href)
+                    print(f"Fetching poster for: {text}")
+                    image_url = fetch_job_image(href)
                     
-                    post_item = {
-                        "title": text,
-                        "link": href,
-                        "content": details_html
-                    }
-                    if post_item not in new_posts:
-                        new_posts.append(post_item)
+                    # Only include posts that actually have a flyer/poster image
+                    if image_url:
+                        post_item = {
+                            "title": text,
+                            "link": href,
+                            "image": image_url
+                        }
+                        if post_item not in new_posts:
+                            new_posts.append(post_item)
 
     return new_posts[:30]
 
 def update_json():
-    # Clear out old posts that lack content or reset the file fresh
     latest_posts = fetch_latest_posts()
-    
     if latest_posts:
         with open(DATA_FILE, "w", encoding="utf-8") as f:
             json.dump(latest_posts, f, indent=4)
-        print(f"Successfully updated {DATA_FILE} with {len(latest_posts)} posts including full content.")
+        print(f"Successfully updated {DATA_FILE} with {len(latest_posts)} poster jobs.")
     else:
-        print("No posts fetched.")
+        print("No poster posts fetched.")
 
 if __name__ == "__main__":
     update_json()
