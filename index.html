@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCC Walkin Jobs | Daily Verified Career Opportunities</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-hover: #0369a1;
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-main); color: var(--text-main); line-height: 1.5; }
+        header { background: var(--bg-card); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.25rem; color: var(--text-main); text-decoration: none; }
+        .logo i { color: var(--primary); font-size: 1.5rem; }
+        .nav-actions { display: flex; align-items: center; gap: 12px; }
+        .social-chip { padding: 8px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: opacity 0.2s; }
+        .whatsapp-chip { background: #dcfce7; color: #15803d; }
+        .telegram-chip { background: #e0f2fe; color: #0369a1; }
+        .social-chip:hover { opacity: 0.85; }
+        .live-badge { background: #dcfce7; color: #15803d; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+        .live-badge span { width: 7px; height: 7px; background-color: #22c55e; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2); animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } }
+        .hero { max-width: 1200px; margin: 32px auto 24px auto; padding: 0 24px; }
+        .hero-content { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); border-radius: 16px; padding: 40px; color: white; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; gap: 20px; }
+        .hero h1 { font-size: 2rem; font-weight: 700; max-width: 700px; }
+        .hero p { font-size: 1rem; opacity: 0.9; max-width: 600px; }
+        .community-banner { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+        .join-btn { background: white; color: var(--text-main); padding: 10px 18px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: background 0.2s, transform 0.2s; box-shadow: var(--shadow); }
+        .join-btn:hover { background: #f1f5f9; transform: translateY(-2px); }
+        .join-btn.whatsapp i { color: #22c55e; }
+        .join-btn.telegram i { color: #0284c7; }
+        .controls-bar { display: flex; gap: 12px; margin-top: 8px; flex-wrap: wrap; }
+        .search-box { flex: 1; min-width: 280px; position: relative; }
+        .search-box i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+        .search-box input { width: 100%; padding: 14px 16px 14px 48px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg-card); color: var(--text-main); font-size: 0.95rem; font-family: inherit; outline: none; transition: all 0.2s; box-shadow: var(--shadow); }
+        .search-box input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15); }
+        .container { max-width: 1200px; margin: 0 auto 60px auto; padding: 0 24px; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .section-header h2 { font-size: 1.25rem; font-weight: 700; color: var(--text-main); }
+        .job-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; }
+        .job-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
+        .job-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: #cbd5e1; }
+        .job-card-top { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+        .job-meta-row { display: flex; justify-content: space-between; align-items: center; }
+        .job-tag { background: #e0f2fe; color: #0369a1; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .job-date { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 5px; }
+        .job-card h3 { font-size: 1.05rem; font-weight: 600; color: var(--text-main); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .job-card-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid var(--border); }
+        .apply-btn { background: var(--primary); color: white; padding: 10px 18px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: background 0.2s; }
+        .apply-btn:hover { background: var(--primary-hover); }
+        .source-link { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+        .source-link:hover { color: var(--primary); }
+        .state-container { text-align: center; padding: 60px 20px; background: var(--bg-card); border-radius: var(--radius); border: 1px solid var(--border); grid-column: 1 / -1; }
+        .state-container i { font-size: 2.5rem; color: var(--primary); margin-bottom: 16px; }
+        .state-container p { color: var(--text-muted); font-size: 0.95rem; }
+        footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 30px 24px; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+        footer .social-links-footer { display: flex; justify-content: center; gap: 16px; margin-bottom: 16px; }
+        @media (max-width: 768px) {
+            .hero-content { padding: 24px; }
+            .hero h1 { font-size: 1.5rem; }
+            .job-grid { grid-template-columns: 1fr; }
+            .nav-actions { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo"><i class="fa-solid fa-briefcase"></i> GCC Walkin Jobs</a>
+            <div class="nav-actions">
+                <a href="https://whatsapp.com/channel/YOUR_WHATSAPP_CHANNEL" target="_blank" class="social-chip whatsapp-chip"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                <a href="https://t.me/YOUR_TELEGRAM_CHANNEL" target="_blank" class="social-chip telegram-chip"><i class="fa-brands fa-telegram"></i> Telegram</a>
+                <div class="live-badge"><span></span> Live Feed</div>
+            </div>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Daily Walk-in Interviews & Direct Client Recruitment</h1>
+            <p>Access high-demand career openings across Dubai, Saudi Arabia, Kuwait, Qatar, and Europe updated hourly.</p>
+            <div class="community-banner">
+                <a href="https://whatsapp.com/channel/YOUR_WHATSAPP_CHANNEL" target="_blank" class="join-btn whatsapp"><i class="fa-brands fa-whatsapp fa-lg"></i> Join WhatsApp Channel</a>
+                <a href="https://t.me/YOUR_TELEGRAM_CHANNEL" target="_blank" class="join-btn telegram"><i class="fa-brands fa-telegram fa-lg"></i> Join Telegram Channel</a>
+            </div>
+            <div class="controls-bar">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="searchInput" placeholder="Search by job title, company, or country..." onkeyup="filterJobs()">
+                </div>
+            </div>
+        </div>
+    </section>
+    <main class="container">
+        <div class="section-header"><h2 id="resultCount">Latest Openings</h2></div>
+        <div class="job-grid" id="job-container">
+            <div class="state-container"><i class="fa-solid fa-circle-notch fa-spin"></i><p>Loading verified positions...</p></div>
+        </div>
+    </main>
+    <footer>
+        <div class="social-links-footer">
+            <a href="https://whatsapp.com/channel/YOUR_WHATSAPP_CHANNEL" target="_blank" class="social-chip whatsapp-chip"><i class="fa-brands fa-whatsapp"></i> Join WhatsApp Updates</a>
+            <a href="https://t.me/YOUR_TELEGRAM_CHANNEL" target="_blank" class="social-chip telegram-chip"><i class="fa-brands fa-telegram"></i> Join Telegram Channel</a>
+        </div>
+        <p>&copy; 2026 GCC Walkin Jobs. Automated Sync Portal. All rights reserved.</p>
+    </footer>
+    <script>
+        let allJobs = [];
+        async function loadJobs() {
+            try {
+                let response = await fetch('posts.json');
+                if (!response.ok) throw new Error('Network response was not ok');
+                allJobs = await response.json();
+                renderJobs(allJobs);
+            } catch (error) {
+                document.getElementById('job-container').innerHTML = `<div class="state-container"><i class="fa-solid fa-triangle-exclamation" style="color: #eab308;"></i><p>Unable to load posts feed right now. Please check back shortly.</p></div>`;
+            }
+        }
+        function renderJobs(jobsToRender) {
+            let container = document.getElementById('job-container');
+            let countLabel = document.getElementById('resultCount');
+            countLabel.textContent = `Latest Openings (${jobsToRender.length})`;
+            if (jobsToRender.length === 0) {
+                container.innerHTML = `<div class="state-container"><i class="fa-solid fa-magnifying-glass"></i><p>No matching positions found. Try a different search term.</p></div>`;
+                return;
+            }
+            container.innerHTML = '';
+            jobsToRender.forEach(job => {
+                let card = document.createElement('div');
+                card.className = 'job-card';
+                card.innerHTML = `<div class="job-card-top"><div class="job-meta-row"><span class="job-tag">Verified Listing</span><span class="job-date"><i class="fa-regular fa-clock"></i> Active</span></div><h3>${job.title}</h3></div><div class="job-card-bottom"><a href="${job.link}" target="_blank" class="source-link">Original Post <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i></a><a href="${job.link}" target="_blank" class="apply-btn">Apply Now <i class="fa-solid fa-chevron-right" style="font-size: 0.75rem;"></i></a></div>`;
+                container.appendChild(card);
+            });
+        }
+        function filterJobs() {
+            let query = document.getElementById('searchInput').value.toLowerCase();
+            let filtered = allJobs.filter(job => job.title.toLowerCase().includes(query));
+            renderJobs(filtered);
+        }
+        loadJobs();
+    </script>
+</body>
+</html>
