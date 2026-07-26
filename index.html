@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GCC Walkin Jobs | Daily Verified Career Opportunities</title>
+    <title>GCC Walkin Jobs | Verified Recruitment Posters</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -47,26 +47,24 @@
         .container { max-width: 1200px; margin: 0 auto 60px auto; padding: 0 24px; }
         .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .section-header h2 { font-size: 1.25rem; font-weight: 700; color: var(--text-main); }
-        .job-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; }
-        .job-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; }
+        .job-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+        .job-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; cursor: pointer; }
         .job-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: #cbd5e1; }
-        .job-card-top { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
-        .job-meta-row { display: flex; justify-content: space-between; align-items: center; }
-        .job-tag { background: #e0f2fe; color: #0369a1; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
-        .job-card h3 { font-size: 1.05rem; font-weight: 600; color: var(--text-main); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .job-card-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid var(--border); }
-        .view-btn { background: var(--primary); color: white; padding: 10px 18px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
-        .view-btn:hover { background: var(--primary-hover); }
+        .poster-container { width: 100%; height: 360px; background: #f1f5f9; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; }
+        .poster-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+        .job-card:hover .poster-container img { transform: scale(1.02); }
+        .job-card-content { padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+        .job-tag { background: #e0f2fe; color: #0369a1; padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; width: fit-content; }
+        .job-card h3 { font-size: 0.95rem; font-weight: 600; color: var(--text-main); line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         
-        /* Modal Popup Styles */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
-        .modal-content { background: var(--bg-card); width: 100%; max-width: 750px; max-height: 85vh; border-radius: var(--radius); box-shadow: var(--shadow-lg); display: flex; flex-direction: column; overflow: hidden; }
-        .modal-header { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .modal-header h2 { font-size: 1.25rem; font-weight: 700; color: var(--text-main); }
+        /* Image Preview Modal */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
+        .modal-content { background: var(--bg-card); max-width: 650px; width: 100%; border-radius: var(--radius); overflow: hidden; position: relative; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; }
+        .modal-header { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .modal-header h2 { font-size: 1rem; font-weight: 600; }
         .close-modal { background: none; border: none; font-size: 1.5rem; color: var(--text-muted); cursor: pointer; }
-        .modal-body { padding: 24px; overflow-y: auto; font-size: 0.95rem; color: var(--text-main); line-height: 1.6; }
-        .modal-body p { margin-bottom: 12px; }
-        .modal-body ul { margin-left: 20px; margin-bottom: 12px; }
+        .modal-body { padding: 0; text-align: center; background: #000; display: flex; justify-content: center; align-items: center; max-height: 80vh; overflow: hidden; }
+        .modal-body img { max-width: 100%; max-height: 75vh; object-fit: contain; }
 
         .state-container { text-align: center; padding: 60px 20px; background: var(--bg-card); border-radius: var(--radius); border: 1px solid var(--border); grid-column: 1 / -1; }
         footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 30px 24px; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
@@ -86,8 +84,8 @@
     </header>
     <section class="hero">
         <div class="hero-content">
-            <h1>Daily Walk-in Interviews & Direct Client Recruitment</h1>
-            <p>Access high-demand career openings across Dubai, Saudi Arabia, Kuwait, Qatar, and Europe updated hourly.</p>
+            <h1>Verified Recruitment Posters & Walk-in Flyers</h1>
+            <p>Direct client interview flyers and official recruitment notices updated hourly across the GCC.</p>
             <div class="community-banner">
                 <a href="https://whatsapp.com/channel/YOUR_WHATSAPP_CHANNEL" target="_blank" class="join-btn whatsapp"><i class="fa-brands fa-whatsapp fa-lg"></i> Join WhatsApp Channel</a>
                 <a href="https://t.me/YOUR_TELEGRAM_CHANNEL" target="_blank" class="join-btn telegram"><i class="fa-brands fa-telegram fa-lg"></i> Join Telegram Channel</a>
@@ -95,27 +93,27 @@
             <div class="controls-bar">
                 <div class="search-box">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="searchInput" placeholder="Search by job title, company, or country..." onkeyup="filterJobs()">
+                    <input type="text" id="searchInput" placeholder="Search by job title or agency..." onkeyup="filterJobs()">
                 </div>
             </div>
         </div>
     </section>
     <main class="container">
-        <div class="section-header"><h2 id="resultCount">Latest Openings</h2></div>
+        <div class="section-header"><h2 id="resultCount">Latest Posters</h2></div>
         <div class="job-grid" id="job-container">
-            <div class="state-container"><i class="fa-solid fa-circle-notch fa-spin"></i><p>Loading verified positions...</p></div>
+            <div class="state-container"><i class="fa-solid fa-circle-notch fa-spin"></i><p>Loading recruitment posters...</p></div>
         </div>
     </main>
 
-    <!-- Full Post View Modal -->
-    <div class="modal-overlay" id="jobModal" onclick=" closeModal(event)">
+    <!-- Poster Preview Modal -->
+    <div class="modal-overlay" id="jobModal" onclick="closeModal(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
             <div class="modal-header">
-                <h2 id="modalTitle">Job Title</h2>
+                <h2 id="modalTitle">Recruitment Flyer</h2>
                 <button class="close-modal" onclick="closeModal()">&times;</button>
             </div>
-            <div class="modal-body" id="modalBody">
-                <!-- Content injected dynamically -->
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="Job Flyer">
             </div>
         </div>
     </div>
@@ -137,33 +135,30 @@
                 allJobs = await response.json();
                 renderJobs(allJobs);
             } catch (error) {
-                document.getElementById('job-container').innerHTML = `<div class="state-container"><i class="fa-solid fa-triangle-exclamation" style="color: #eab308;"></i><p>Unable to load posts feed right now.</p></div>`;
+                document.getElementById('job-container').innerHTML = `<div class="state-container"><i class="fa-solid fa-triangle-exclamation" style="color: #eab308;"></i><p>Unable to load posters feed right now.</p></div>`;
             }
         }
 
         function renderJobs(jobsToRender) {
             let container = document.getElementById('job-container');
             let countLabel = document.getElementById('resultCount');
-            countLabel.textContent = `Latest Openings (${jobsToRender.length})`;
+            countLabel.textContent = `Latest Posters (${jobsToRender.length})`;
             if (jobsToRender.length === 0) {
-                container.innerHTML = `<div class="state-container"><i class="fa-solid fa-magnifying-glass"></i><p>No matching positions found.</p></div>`;
+                container.innerHTML = `<div class="state-container"><i class="fa-solid fa-magnifying-glass"></i><p>No matching posters found.</p></div>`;
                 return;
             }
             container.innerHTML = '';
-            jobsToRender.forEach((job, index) => {
+            jobsToRender.forEach((job) => {
                 let card = document.createElement('div');
                 card.className = 'job-card';
                 card.onclick = () => openModal(job);
                 card.innerHTML = `
-                    <div class="modal-trigger">
-                        <div class="job-card-top">
-                            <div class="job-meta-row"><span class="job-tag">Verified Listing</span><span class="job-date"><i class="fa-regular fa-clock"></i> Active</span></div>
-                            <h3>${job.title}</h3>
-                        </div>
+                    <div class="poster-container">
+                        <img src="${job.image}" alt="${job.title}" loading="lazy">
                     </div>
-                    <div class="job-card-bottom">
-                        <span class="source-link" style="color: var(--primary);">View Full Details &rarr;</span>
-                        <button class="view-btn">Read Job</button>
+                    <div class="job-card-content">
+                        <span class="job-tag">Verified Flyer</span>
+                        <h3>${job.title}</h3>
                     </div>`;
                 container.appendChild(card);
             });
@@ -171,7 +166,7 @@
 
         function openModal(job) {
             document.getElementById('modalTitle').textContent = job.title;
-            document.getElementById('modalBody').innerHTML = job.content || '<p>No details found.</p>';
+            document.getElementById('modalImage').src = job.image;
             document.getElementById('jobModal').style.display = 'flex';
         }
 
