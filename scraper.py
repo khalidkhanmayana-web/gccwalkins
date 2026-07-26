@@ -8,40 +8,44 @@ DATA_FILE = "posts.json"
 
 def fetch_latest_posts():
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5"
     }
-    response = requests.get(TARGET_URL, headers=headers)
-    if response.status_code != 200:
-        print(f"Failed to fetch website. Status code: {response.status_code}")
+    
+    try:
+        response = requests.get(TARGET_URL, headers=headers, timeout=15)
+        print(f"HTTP Status Code: {response.status_code}")
+        if response.status_code != 200:
+            return []
+    except Exception as e:
+        print(f"Request error: {e}")
         return []
 
     soup = BeautifulSoup(response.text, 'html.parser')
     new_posts = []
 
-    # Target standard WordPress article/post links and headings on the page
-    # This selector looks for anchor tags inside headings or post wrappers
-    articles = soup.find_all(['article', 'div'], class_=lambda x: x and ('post' in x or 'entry' in x or 'card' in x))
-    
-    # Fallback search if specific containers aren't caught: look for all links inside main content areas
-    for item in soup.find_all('a'):
-        href = item.get('href')
-        text = item.get_text(strip=True)
+    # Target the specific Newsup/WordPress heading links where job titles are posted
+    # Looking for titles inside headings or post entry wrappers
+    for a_tag in soup.find_all('a'):
+        href = a_tag.get('href')
+        text = a_tag.get_text(strip=True)
         
-        # Filter for actual job posting links (usually containing hiring, job, requirement, interview)
-        if href and text and len(text) > 15:
-            keywords = ["hiring", "requirement", "interview", "dubai", "saudi", "abu dhabi", "qatar", "kuwait", "oman", "walk-in", "job"]
-            if any(kw in text.lower() for kw in keywords):
-                if not href.startswith("http"):
-                    continue
-                
-                post_item = {
-                    "title": text,
-                    "link": href
-                }
-                if post_item not in new_posts:
-                    new_posts.append(post_item)
+        # Validation checks to ensure we capture actual job posts and avoid menu/footer links
+        if href and text and len(text) > 20:
+            if "gccwalkin.com" in href and href != "https://gccwalkin.com/":
+                # Exclude standard navigation/footer links
+                skip_keywords = ["privacy policy", "disclaimer", "contact", "about us", "faqs", "post job", "home"]
+                if not any(sk in text.lower() for sk in skip_keywords):
+                    post_item = {
+                        "title": text,
+                        "link": href
+                    }
+                    if post_item not in new_posts:
+                        new_posts.append(post_item)
 
-    return new_posts[:40] # Keep the top 40 freshest unique job links
+    print(f"Successfully scraped {len(new_posts)} posts.")
+    return new_posts[:50]
 
 def update_json():
     existing_posts = []
@@ -64,9 +68,9 @@ def update_json():
     if added_count > 0:
         with open(DATA_FILE, "w", encoding="utf-8") as f:
             json.dump(existing_posts, f, indent=4)
-        print(f"Added {added_count} new posts.")
+        print(f"Added {added_count} new posts to {DATA_FILE}.")
     else:
-        print("No new posts found.")
+        print("No new posts to add.")
 
 if __name__ == "__main__":
     update_json()
