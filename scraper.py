@@ -13,12 +13,34 @@ def fetch_job_image(job_url):
         if res.status_code == 200:
             soup = BeautifulSoup(res.text, 'html.parser')
             
-            # Target the post content area where flyers/posters are uploaded
+            # Look for standard post containers where recruitment flyers live
             content_div = soup.find('div', class_='entry-content') or soup.find('div', class_='bs-content') or soup.find('article')
+            
             if content_div:
-                img_tag = content_div.find('img')
-                if img_tag and img_tag.get('src'):
-                    return img_tag['src']
+                # Find all images inside the content
+                images = content_div.find_all('img')
+                for img in images:
+                    # Check standard src or lazy-loading attributes
+                    img_url = img.get('src') or img.get('data-src') or img.get('data-lazy-src')
+                    if img_url:
+                        # Skip small icons, avatars, or emojis
+                        if any(skip in img_url.lower() for skip in ['icon', 'avatar', 'emoji', 'spacer', 'logo']):
+                            continue
+                        # Ensure absolute URL
+                        if img_url.startswith('//'):
+                            img_url = 'https:' + img_url
+                        elif img_url.startswith('/'):
+                            img_url = 'https://gccwalkin.com' + img_url
+                        return img_url
+            
+            # Fallback: search any image on the whole page if none found in content div
+            for img in soup.find_all('img'):
+                img_url = img.get('src') or img.get('data-src')
+                if img_url and 'uploads' in img_url:
+                    if img_url.startswith('//'):
+                        img_url = 'https:' + img_url
+                    return img_url
+                    
     except Exception as e:
         print(f"Error fetching image for {job_url}: {e}")
     return None
@@ -40,10 +62,9 @@ def fetch_latest_posts():
             if "gccwalkin.com" in href and href != "https://gccwalkin.com/":
                 skip_keywords = ["privacy policy", "disclaimer", "contact", "about us", "faqs", "post job", "home"]
                 if not any(sk in text.lower() for sk in skip_keywords):
-                    print(f"Fetching poster for: {text}")
+                    print(f"Checking poster for: {text}")
                     image_url = fetch_job_image(href)
                     
-                    # Only include posts that actually have a flyer/poster image
                     if image_url:
                         post_item = {
                             "title": text,
