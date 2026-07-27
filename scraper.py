@@ -13,34 +13,30 @@ def fetch_job_image(job_url):
         if res.status_code == 200:
             soup = BeautifulSoup(res.text, 'html.parser')
             
-            # Look for standard post containers where recruitment flyers live
+            # Target WordPress entry content area where flyers are uploaded
             content_div = soup.find('div', class_='entry-content') or soup.find('div', class_='bs-content') or soup.find('article')
-            
             if content_div:
-                # Find all images inside the content
-                images = content_div.find_all('img')
-                for img in images:
-                    # Check standard src or lazy-loading attributes
+                for img in content_div.find_all('img'):
                     img_url = img.get('src') or img.get('data-src') or img.get('data-lazy-src')
                     if img_url:
-                        # Skip small icons, avatars, or emojis
-                        if any(skip in img_url.lower() for skip in ['icon', 'avatar', 'emoji', 'spacer', 'logo']):
+                        # Skip small icons, emojis or logos
+                        if any(skip in img_url.lower() for skip in ['icon', 'avatar', 'emoji', 'spacer', 'logo', 'wp-content/uploads/25x']):
                             continue
-                        # Ensure absolute URL
                         if img_url.startswith('//'):
                             img_url = 'https:' + img_url
                         elif img_url.startswith('/'):
                             img_url = 'https://gccwalkin.com' + img_url
                         return img_url
             
-            # Fallback: search any image on the whole page if none found in content div
+            # Secondary check for any large image in the post
             for img in soup.find_all('img'):
                 img_url = img.get('src') or img.get('data-src')
                 if img_url and 'uploads' in img_url:
+                    if any(skip in img_url.lower() for skip in ['icon', 'logo', 'avatar']):
+                        continue
                     if img_url.startswith('//'):
                         img_url = 'https:' + img_url
                     return img_url
-                    
     except Exception as e:
         print(f"Error fetching image for {job_url}: {e}")
     return None
